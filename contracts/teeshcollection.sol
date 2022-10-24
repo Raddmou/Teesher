@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity solidity ^0.8.9;
+pragma solidity ^0.8.9;
 
 
 //import "hardhat/console.sol";
@@ -30,7 +30,6 @@ contract TeeshCollection is ERC1155, Ownable {
 
         _mint(_to, 0, _quantity, _data);
         tokenSupply = tokenSupply + _quantity;
-      _incrementTokenTypeId();
   }
 
     function safeTransferFrom(
@@ -38,7 +37,7 @@ contract TeeshCollection is ERC1155, Ownable {
         address to,
         uint256 amount,
         bytes memory data
-    ) public virtual override zebrasAreNotLocked(id) {
+    ) public {
         super.safeTransferFrom(from, to, 0, amount, data);
     }
 }

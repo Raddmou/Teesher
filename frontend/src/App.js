@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import {ethers} from 'ethers';
-import Lock from './artifacts/contracts/Lock.sol/Lock.json';
+import Lock from './artifacts/contracts/teeshcollection.sol/TeeshCollection.json';
 import './App.css';
 import imgUrl from './img/d1a2d30d74c79ea5ad5c62ea746f148f.jpg'
 
-const SmartContractAddress = "0x"
+const SmartContractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 function App() {
 
@@ -21,8 +21,8 @@ function App() {
       const contract = new ethers.Contract(SmartContractAddress, Lock.abi, provider);
       try {
         const cost = await contract.cost();
-        const totalSupply = await contract.totalSupply();
-        const object = {"cost": String(cost), "totalSupply" : String(totalSupply)};
+        const tokenSupply = await contract.tokenSupply();
+        const object = {"cost": String(cost), "tokenSupply" : String(tokenSupply)};
         setData(object);
       } catch (error) {
         setError(error.message);
@@ -58,7 +58,7 @@ function App() {
         </div>
         {error && <p>{error}</p>}
         <h1>h1</h1>
-        <p className='count'>{data.totalSupply} / 1000</p>
+        <p className='count'>{data.tokenSupply} / 1000</p>
         <p className='cost'>Price {data.cost / 10**18}</p>
         <button onClick={mint}>Mint</button>
       </div>
